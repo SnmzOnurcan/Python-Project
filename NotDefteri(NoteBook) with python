@@ -1,0 +1,44 @@
+import os
+
+class NotDefteri:
+    def __init__(self, dosya_adi):
+        self.dosya_adi = dosya_adi
+
+    def dosyayi_ac(self):
+        try:
+            with open(self.dosya_adi, 'r') as dosya:
+                icerik = dosya.read()
+                print(f"\n--- {self.dosya_adi} ---\n")
+                print(icerik)
+        except FileNotFoundError:
+            print("Belirtilen dosya bulunamadı.")
+
+    def dosyayi_kaydet(self, icerik):
+        with open(self.dosya_adi, 'w') as dosya:
+            dosya.write(icerik)
+        print(f"{self.dosya_adi} başarıyla kaydedildi.")
+
+def main():
+    dosya_adi = input("Not defteri için dosya adını girin: ")
+    not_defteri = NotDefteri(dosya_adi)
+
+    while True:
+        print("\n1. Dosyayı Aç")
+        print("2. Dosyayı Kaydet")
+        print("3. Çıkış")
+
+        secim = input("Yapmak istediğiniz işlemi seçin (1/2/3): ")
+
+        if secim == '1':
+            not_defteri.dosyayi_ac()
+        elif secim == '2':
+            icerik = input("Kaydetmek istediğiniz metni girin: ")
+            not_defteri.dosyayi_kaydet(icerik)
+        elif secim == '3':
+            print("Çıkılıyor...")
+            break
+        else:
+            print("Geçersiz seçim. Lütfen 1, 2 veya 3 seçeneğinden birini girin.")
+
+if __name__ == "__main__":
+    main()
